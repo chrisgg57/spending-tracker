@@ -483,7 +483,8 @@
     const btn = document.getElementById('auth-btn'), msg = document.getElementById('auth-msg');
     btn.disabled=true; btn.textContent='Sending…'; msg.className='auth-msg'; msg.textContent='';
     try {
-      await authPost('otp', { email });
+      const redirectTo = window.location.origin + window.location.pathname;
+      await authPost('otp', { email, email_redirect_to: redirectTo });
       msg.className='auth-msg ok'; msg.textContent='Magic link sent! Check your email and click the link to sign in.';
       btn.textContent='Resend link';
     } catch(e) {
